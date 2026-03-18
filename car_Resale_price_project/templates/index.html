@@ -1,0 +1,164 @@
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Car Resale Price Predictor</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<header>
+<h1>🚗 Car Resale Price Predictor</h1>
+</header>
+
+<div class="main-container">
+
+<div class="form-section">
+
+<h2>Enter Vehicle Details</h2>
+
+<form action="/predict" method="post" id="carForm">
+
+<label>Manufacturer</label>
+<select name="Manufacturer" required>
+
+<option value="">Select Manufacturer</option>
+<option value="Toyota">Toyota</option>
+<option value="BMW">BMW</option>
+<option value="Ford">Ford</option>
+<option value="Porsche">Porsche</option>
+<option value="VW">VW</option>
+
+</select>
+
+
+<label>Model</label>
+<select name="Model" required>
+
+<option value="">Select Model</option>
+
+<option value="718 Cayman">718 Cayman</option>
+<option value="911">911</option>
+<option value="Cayenne">Cayenne</option>
+
+<option value="Fiesta">Fiesta</option>
+<option value="Focus">Focus</option>
+<option value="Mondeo">Mondeo</option>
+
+<option value="Golf">Golf</option>
+<option value="Passat">Passat</option>
+<option value="Polo">Polo</option>
+
+<option value="Prius">Prius</option>
+<option value="RAV4">RAV4</option>
+<option value="Yaris">Yaris</option>
+
+<option value="M5">M5</option>
+<option value="X3">X3</option>
+<option value="Z4">Z4</option>
+
+</select>
+
+
+<label>Fuel Type</label>
+<select name="Fuel type" required>
+
+<option value="">Select Fuel Type</option>
+<option value="Petrol">Petrol</option>
+<option value="Diesel">Diesel</option>
+<option value="Hybrid">Hybrid</option>
+
+</select>
+
+
+<label>Mileage (km)</label>
+<input type="number" name="Mileage" placeholder="Enter Mileage in kilometers" required>
+
+
+<label>Engine Size (cc)</label>
+<input type="number" name="Engine size" placeholder="Enter Engine Size in Cubic Centimeters" required>
+
+
+<label>Year</label>
+<input type="number" name="Year" placeholder="Enter Year" required>
+
+
+<button type="submit">Predict Price</button>
+
+</form>
+
+
+{% if prediction_text %}
+
+<!-- Added ID here -->
+<div class="result-card" id="resultCard">
+
+<h3>{{ prediction_text }}</h3>
+
+<p><b>Manufacturer:</b> {{manufacturer}}</p>
+<p><b>Model:</b> {{model}}</p>
+<p><b>Fuel Type:</b> {{fuel}}</p>
+<p><b>Mileage:</b> {{mileage}} km</p>
+<p><b>Engine Size:</b> {{engine}} cc</p>
+<p><b>Year:</b> {{year}}</p>
+
+</div>
+
+{% endif %}
+
+</div>
+
+</div>
+
+
+<script>
+
+
+window.onload=function(){
+document.getElementById("carForm").reset()
+}
+
+
+
+
+document.getElementById("carForm").addEventListener("input", function(){
+
+let result=document.getElementById("resultCard")
+
+if(result){
+result.style.display="none"
+}
+
+})
+
+
+
+let images=[
+"https://images.unsplash.com/photo-1503376780353-7e6692767b70",
+"https://images.unsplash.com/photo-1511919884226-fd3cad34687c",
+"https://images.unsplash.com/photo-1492144534655-ae79c964c9d7",
+"https://images.unsplash.com/photo-1555215695-3004980ad54e",
+"https://images.unsplash.com/photo-1502877338535-766e1452684a"
+]
+
+let i=0
+
+setInterval(function(){
+
+document.body.style.backgroundImage="url("+images[i]+")"
+
+i++
+
+if(i==images.length){
+i=0
+}
+
+},3000)
+
+</script>
+
+</body>
+</html>
